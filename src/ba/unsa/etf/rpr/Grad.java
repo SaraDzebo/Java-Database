@@ -14,11 +14,11 @@ public class Grad {
     }
     public Grad(){}
 
-    public int getId() {
+    public int getIdGrad() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setIdGrad(int id) {
         this.id = id;
     }
 
@@ -26,7 +26,7 @@ public class Grad {
         return naziv;
     }
 
-    public void setNaziv(String naziv) {
+    public void setNazivGrad(String naziv) {
         this.naziv = naziv;
     }
 
