@@ -22,7 +22,7 @@ public class Grad {
         this.id = id;
     }
 
-    public String getNaziv() {
+    public String getNazivGrada() {
         return naziv;
     }
 

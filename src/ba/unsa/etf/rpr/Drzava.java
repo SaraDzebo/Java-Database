@@ -17,7 +17,7 @@ public class Drzava {
         return id;
     }
 
-    public void setId(int id) {
+    public void setIdDrzava(int id) {
         this.id = id;
     }
 

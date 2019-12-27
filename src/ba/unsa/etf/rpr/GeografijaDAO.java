@@ -7,6 +7,14 @@ public class GeografijaDAO {
     private static GeografijaDAO instance;
     private PreparedStatement upit;
     private Connection conn;
+
+    public Connection getConn() {
+        return conn;
+    }
+
+   private static void initializa(){
+        instance=new GeografijaDAO();
+   }
     public static GeografijaDAO getInstance(){
         if(instance==null)
             instance=new GeografijaDAO();
@@ -39,6 +47,7 @@ public class GeografijaDAO {
             } catch (SQLException ignored) {
             }
         }
+
     }
 
 
