@@ -1,7 +1,10 @@
 package ba.unsa.etf.rpr;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GeografijaDAO {
     private static GeografijaDAO instance;
@@ -33,7 +36,7 @@ public class GeografijaDAO {
         try {
             glavniGradUpit =conn.prepareStatement("SELECT* FROM grad,drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
         } catch (SQLException e) {
-            //regenerisiBazu();
+            regenerisiBazu();
             e.printStackTrace();
 
             try {
@@ -66,6 +69,31 @@ public class GeografijaDAO {
                 glavniGradUpit.executeUpdate();
             } catch (SQLException ignored) {
             }
+        }
+
+    }
+
+    private void regenerisiBazu(){
+        try {
+            Scanner ulaz=new Scanner(new FileInputStream("baza.db.sql"));
+            String sqlUpit="";
+            while(ulaz.hasNext()){
+                sqlUpit+=ulaz.nextLine();
+                if(sqlUpit.charAt(sqlUpit.length()-1)==';'){
+                    try {
+                        Statement stmt= null;
+                        stmt = conn.createStatement();
+                        stmt.execute(sqlUpit);
+                        sqlUpit="";
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+            ulaz.close();
+        } catch (FileNotFoundException e) {
+           // e.printStackTrace();
         }
 
     }
