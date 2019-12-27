@@ -6,11 +6,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class GeografijaDAO {
     private static GeografijaDAO instance;
     private PreparedStatement glavniGradUpit,dajDrzavuUpit,obrisiDrzavuUpit,obrisiGradoveZaDrzave,nadjiDrzavuUpit,dajGradoveUpit,dodajGradoveUpit,
-    odrediIdGradUpit,odrediIdDrzaveUpit,promijeniGradUpit,dajGradUpit,dodajDrzavuUpit;
+    odrediIdGradUpit,odrediIdDrzaveUpit,promijeniGradUpit,dajGradUpit,dodajDrzavuUpit,upit;
     private Connection conn;
+
+    public static void removeInstance() {
+    }
 
     public Connection getConn() {
         return conn;
@@ -127,6 +131,44 @@ public class GeografijaDAO {
         }
 
         return gradoviBaze;
+
+    }
+
+    public void izmijeniGrad(Grad grad) {
+        try {
+            upit=conn.prepareStatement("UPDATE grad SET naziv=?,broj_stanovnika=?,drzava=? WHERE id=?");
+            upit.setString(1,grad.getNazivGrada());
+            upit.setInt(2,grad.getBrojStanovnika());
+            upit.setInt(3,grad.getDrzava().getIdGrad());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Grad glavniGrad(String drzava) {
+    }
+
+    public Drzava nadjiDrzavu(String naziv) {
+        //getDrzavaBynaziv upit;
+        Drzava d=null;
+        try {
+            getDrzavaBynaziv.clearParameters();
+            getDrzavaynaziv.setString(1,drzava);
+            ResultSet rs=getDrzavaByNaziv.executeCuery();
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return d;
+
+    }
+
+    public void dodajDrzavu(Drzava drzava) {
+    }
+
+    public void dodajGrad(Grad grad) {
 
     }
 }

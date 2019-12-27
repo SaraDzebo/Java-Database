@@ -38,8 +38,8 @@ public class Grad {
         this.brojStanovnika = brojStanovnika;
     }
 
-    public Drzava getDrzava() {
-        return drzava;
+    public String getDrzava() {
+        return naziv;
     }
 
     public void setDrzava(Drzava drzava) {

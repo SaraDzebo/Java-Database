@@ -1,12 +1,12 @@
 package ba.unsa.etf.rpr;
 
-/*import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class GeografijaDAOTest {
 
@@ -118,4 +118,4 @@ class GeografijaDAOTest {
         ArrayList<Grad> gradovi = dao.gradovi();
         assertEquals("Vienna", gradovi.get(2).getNaziv());
     }
-}*/
+}
