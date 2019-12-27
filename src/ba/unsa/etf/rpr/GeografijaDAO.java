@@ -13,6 +13,9 @@ public class GeografijaDAO {
         return instance;
     }
     private GeografijaDAO() {
+        ArrayList<Grad> gradovi = new ArrayList<>();
+        ArrayList<Drzava> drzave = new ArrayList<>();
+
         try {
             conn= DriverManager.getConnection("jdbc:sqlite:baza.db");
         } catch (SQLException e) {
@@ -23,7 +26,21 @@ public class GeografijaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            upit = conn.prepareStatement("UPDATE grad SET drzava = ? WHERE id = ?");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (var grad : gradovi) {
+            try{
+                upit.setInt(1, grad.getDrzava().getIdDrzava());
+                upit.setInt(2, grad.getIdGrad());
+                upit.executeUpdate();
+            } catch (SQLException ignored) {
+            }
+        }
     }
+
 
     ArrayList<Grad> gradovi(){
         ArrayList<Grad> gradoviBaze=new ArrayList<>();

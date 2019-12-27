@@ -13,7 +13,7 @@ public class Drzava {
 
     public Drzava(){}
 
-    public int getId() {
+    public int getIdDrzava() {
         return id;
     }
 
@@ -21,11 +21,11 @@ public class Drzava {
         this.id = id;
     }
 
-    public String getNaziv() {
+    public String getDrzava() {
         return naziv;
     }
 
-    public void setNaziv(String naziv) {
+    public void setDrzava(String naziv) {
         this.naziv = naziv;
     }
 
