@@ -13,19 +13,19 @@ public class Drzava {
 
     public Drzava(){}
 
-    public int getIdDrzava() {
+    public int getId() {
         return id;
     }
 
-    public void setIdDrzava(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getDrzava() {
+    public String getNaziv() {
         return naziv;
     }
 
-    public void setDrzava(String naziv) {
+    public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
 

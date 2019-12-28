@@ -14,19 +14,19 @@ public class Grad {
     }
     public Grad(){}
 
-    public int getIdGrad() {
+    public int getId() {
         return id;
     }
 
-    public void setIdGrad(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getNazivGrada() {
+    public String getNaziv() {
         return naziv;
     }
 
-    public void setNazivGrad(String naziv) {
+    public void setNaziv(String naziv) {
         this.naziv = naziv;
     }
 
@@ -38,8 +38,8 @@ public class Grad {
         this.brojStanovnika = brojStanovnika;
     }
 
-    public String getDrzava() {
-        return naziv;
+    public Drzava getDrzava() {
+        return drzava;
     }
 
     public void setDrzava(Drzava drzava) {
