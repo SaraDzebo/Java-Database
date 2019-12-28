@@ -167,7 +167,7 @@ public class GeografijaDAO {
 
     }
 
-    public Grad glavniGrad(String drzava) {
+   /* public Grad glavniGrad(String drzava) {
     }
 
     public Drzava nadjiDrzavu(String naziv) {
@@ -183,7 +183,7 @@ public class GeografijaDAO {
         }
         return d;
 
-    }
+    }*/
 
     public void dodajDrzavu(Drzava drzava) {
     }
