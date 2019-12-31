@@ -19,7 +19,7 @@ INSERT INTO "drzava" VALUES (2,'Velika Britanija',2);
 INSERT INTO "drzava" VALUES (3,'Austrija',3);
 INSERT INTO "grad" VALUES (1,'Pariz',2200000,1);
 INSERT INTO "grad" VALUES (2,'London',8136000,2);
-INSERT INTO "grad" VALUES (3,'Bec',1868000,3);
+INSERT INTO "grad" VALUES (3,'Beč',1868000,3);
 INSERT INTO "grad" VALUES (4,'Manchester',510746,2);
 INSERT INTO "grad" VALUES (5,'Graz',273869,3);
 COMMIT;

@@ -12,7 +12,7 @@ public class Main {
     }
 
     private static void glavniGrad() {
-        GeografijaDAO dao=new GeografijaDAO.getInstance();
+        GeografijaDAO dao=GeografijaDAO.getInstance();
         Scanner sc=new Scanner(System.in);
         System.out.println("Unesite naziv drzave: ");
         String naziv=sc.nextLine();
@@ -28,7 +28,7 @@ public class Main {
 
 
     public static String ispisiGradove() {
-        GeografijaDAO dao=new GeografijaDAO.getInstance();
+        GeografijaDAO dao=GeografijaDAO.getInstance();
         String s="";
         for(Grad grad:dao.gradovi()){
             s+=grad.getNaziv()+" ("+grad.getDrzava().getNaziv()+") - "+grad.getBrojStanovnika()+"\n";

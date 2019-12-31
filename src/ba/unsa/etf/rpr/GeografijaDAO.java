@@ -26,7 +26,10 @@ public class GeografijaDAO {
     }
 
     public static void removeInstance() {
+        if(instance==null)
+            return ;
         try {
+
             if (conn != null)
                 conn.close();
         } catch(SQLException ignore){}
