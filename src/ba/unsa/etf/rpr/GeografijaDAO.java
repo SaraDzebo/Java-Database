@@ -13,30 +13,33 @@ public class GeografijaDAO {
     odrediIdGradUpit,odrediIdDrzaveUpit,promijeniGradUpit,dajGradUpit,dodajDrzavuUpit;
     private static Connection conn;
 
-
-
-    public Connection getConn() {
-        return conn;
-    }
-
     public static GeografijaDAO getInstance(){
         if(instance==null)
-            initialize();
+            instance=new GeografijaDAO();
         return instance;
     }
 
-    public static void removeInstance() {
-        if(instance==null)
-            return ;
-        try {
 
-            if (conn != null)
+
+  // public Connection getConn() {
+        //return conn;
+    //}
+
+
+
+    public static void removeInstance() {
+        if(instance!=null){
+            try {
                 conn.close();
-        } catch(SQLException ignore){}
-        instance=null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        instance = null;
     }
 
-   private static void initialize(){
+
+    private static void initialize(){
         instance=new GeografijaDAO();
    }
 
@@ -48,13 +51,13 @@ public class GeografijaDAO {
             e.printStackTrace();
         }
         try {
-            glavniGradUpit = conn.prepareStatement("SELECT* FROM grad,drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
+            glavniGradUpit = conn.prepareStatement("SELECT grad.id,grad.naziv,grad.broj_stanovnika,grad.drzava FROM grad,drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
         } catch (SQLException e) {
             regenerisiBazu();
             // e.printStackTrace();
 
             try {
-                glavniGradUpit = conn.prepareStatement("SELECT* FROM grad,drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
+                glavniGradUpit = conn.prepareStatement("SELECT grad.id,grad.naziv,grad.broj_stanovnika,grad.drzava FROM grad,drzava WHERE grad.drzava=drzava.id AND drzava.naziv=?");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
@@ -86,8 +89,8 @@ public class GeografijaDAO {
                 sqlUpit+=ulaz.nextLine();
                 if(sqlUpit.charAt(sqlUpit.length()-1)==';'){
                     try {
-                        Statement stmt= null;
-                        stmt = conn.createStatement();
+                        //Statement stmt= null;
+                        Statement stmt = conn.createStatement();
                         stmt.execute(sqlUpit);
                         sqlUpit="";
                     } catch (SQLException e) {
@@ -98,19 +101,15 @@ public class GeografijaDAO {
             }
             ulaz.close();
         } catch (FileNotFoundException e) {
-           // e.printStackTrace();
+           //e.printStackTrace();
         }
 
     }
 
-
-
-
-
-    ArrayList<Grad> gradovi(){
+    public ArrayList<Grad> gradovi(){
         ArrayList<Grad> rezultat=new ArrayList<>();
         try {
-            ResultSet rs = glavniGradUpit.executeQuery();
+            ResultSet rs = dajGradoveUpit.executeQuery();
             while (rs.next()) {
                 Grad grad = dajGradIzResultSeta(rs);
 
@@ -125,7 +124,7 @@ public class GeografijaDAO {
                 rezultat.add(grad);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return rezultat;
 
@@ -139,7 +138,7 @@ public class GeografijaDAO {
             promijeniGradUpit.setInt(4,grad.getId());
             promijeniGradUpit.executeUpdate();
         }catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }
@@ -149,9 +148,7 @@ public class GeografijaDAO {
        try {
            glavniGradUpit.setString(1,drzava);
            ResultSet rs=glavniGradUpit.executeQuery();
-           if(!rs.next()){
-               return null;
-           }
+           if(!rs.next()) return null;
                 return dajGradIzResultSeta(rs);
        } catch (SQLException e) {
            e.printStackTrace();
@@ -170,9 +167,7 @@ public class GeografijaDAO {
         try {
             dajDrzavuUpit.setInt(1,id);
             ResultSet rs=dajDrzavuUpit.executeQuery();
-            if(!rs.next()){
-                return null;
-            }
+            if(!rs.next()) return null;
             return dajDrzavuIzResultSeta(rs,grad);
 
         } catch (SQLException e) {
@@ -184,9 +179,7 @@ public class GeografijaDAO {
         try {
             dajGradUpit.setInt(1,id);
             ResultSet rs=dajGradUpit.executeQuery();
-            if(!rs.next()){
-                return null;
-            }
+            if(!rs.next()) return null;
             return dajGradIzResultSeta(rs);
 
         } catch (SQLException e) {
@@ -218,15 +211,15 @@ public class GeografijaDAO {
             int id=1;
             if(rs.next()){
                 id=rs.getInt(1);
-
             }
             dodajDrzavuUpit.setInt(1,id);
             dodajDrzavuUpit.setString(2, drzava.getNaziv());
             //dodajGradoveUpit.setInt(3,grad.getBrojStanovnika());
             dodajDrzavuUpit.setInt(3,drzava.getGlavniGrad().getId());
             dodajDrzavuUpit.executeUpdate();
+
         }catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }
@@ -254,16 +247,15 @@ public class GeografijaDAO {
         try {
             nadjiDrzavuUpit.setString(1,nazivDrzave);
             ResultSet rs=nadjiDrzavuUpit.executeQuery();
-            if(!rs.next())
-                return;
+            if(!rs.next()) return;
             Drzava drzava=dajDrzavuIzResultSeta(rs,null);
-            obrisiGradoveZaDrzave.setInt(1,drzava.getId());
+            obrisiGradoveZaDrzave.setInt(1,rs.getInt(1));
             obrisiGradoveZaDrzave.executeUpdate();
             obrisiDrzavuUpit.setInt(1,drzava.getId());
             obrisiDrzavuUpit.executeUpdate();
 
-        } catch (SQLException greska) {
-            greska.printStackTrace();
+        } catch (SQLException e) {
+           // greska.printStackTrace();
         }
     }
 
